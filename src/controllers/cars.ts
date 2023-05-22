@@ -30,7 +30,7 @@ export const detailCar = async (req: Request, res: Response) => {
 
 export const registerCar = async (req: Request, res: Response) => {
     const { brand, model, year_car, color, value_car } = req.body
-    console.log(brand, model, year_car, color, value_car);
+    
     try {
         const car = await knex<Omit<Car, 'id'>>('cars').insert({
             brand,
@@ -39,7 +39,7 @@ export const registerCar = async (req: Request, res: Response) => {
             color,
             value_car
         }).returning('*')
-        console.log(car);
+       
         return res.status(201).json(car[0])
     } catch {
         return res.status(500).json({ mensagem: 'Erro interno do servidor!.' })
