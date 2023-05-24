@@ -1,4 +1,7 @@
 import { Router } from "express";
+const validateBodyOfRequest = require("./middlewares/validateBodyOfRequire");
+const schemaCar = require("./validation/schamaCar");
+
 import {
     updateCar,
     registerCar,
@@ -9,8 +12,9 @@ import {
 
 const route = Router();
 
+route.post('/carros', validateBodyOfRequest(schemaCar), registerCar);
+
 route.put('/carros/:id', updateCar);
-route.post('/carros', registerCar);
 route.get('/carros/:id', detailCar);
 route.delete('/carros/:id', deleteCar);
 route.get('/carros', listCar);
